@@ -1,5 +1,8 @@
 <?php
+
+
 session_start();
+
 if (!isset($_SESSION['usuario'])) {
     header("Location: ../../index.php");
     exit();
@@ -35,40 +38,55 @@ $totales = CompraControlador::obtenerTotales();
 ?>
 
 <!-- HTML reducido -->
-<form method="POST">
-    <label>Producto:</label>
-    <select name="id_producto" required>
-        <option value="">Seleccione</option>
-        <?php foreach ($productos as $prod): ?>
-            <option value="<?= $prod['id'] ?>"><?= $prod['nombre'] ?></option>
-        <?php endforeach; ?>
-    </select><br>
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ </head>
+ <body>
+        <form method="POST">
+        <label>Producto:</label>
+        <select name="id_producto" required>
+            <option value="">Seleccione</option>
+            <?php foreach ($productos as $prod): ?>
+                <option value="<?= $prod['id'] ?>"><?= $prod['nombre'] ?></option>
+            <?php endforeach; ?>
+        </select><br>
 
-    <label>Socio:</label>
-    <select name="id_socio" required>
-        <option value="">Seleccione</option>
-        <?php foreach ($socios as $socio): ?>
-            <option value="<?= $socio['id'] ?>"><?= $socio['nombre'] ?></option>
-        <?php endforeach; ?>
-    </select><br>
+        <label>Socio:</label>
+        <select name="id_socio" required>
+            <option value="">Seleccione</option>
+            <?php foreach ($socios as $socio): ?>
+                <option value="<?= $socio['id'] ?>"><?= $socio['nombre'] ?></option>
+            <?php endforeach; ?>
+        </select><br>
+        <label>COBASE:</label>
+        <input type="text" id="cobase" name="cobase" readonly><br>
 
-    <label>Unidad:</label>
-    <input type="text" name="unidad" value="Quintales"><br>
 
-    <label>Rendimiento:</label>
-    <input type="number" name="rendimiento" min="80" max="95" step="0.01" required><br>
+        <label>Unidad:</label>
+        <input type="text" name="unidad" value="Quintales"><br>
 
-    <label>Humedad:</label>
-    <input type="number" name="humedad" min="12" max="15" step="0.01" required><br>
+        <label>Rendimiento:</label>
+        <input type="number" name="rendimiento" min="80" max="95" step="0.01" required><br>
 
-    <label>Guía de ingreso:</label>
-    <input type="text" name="guia_ingreso"><br>
+        <label>Humedad:</label>
+        <input type="number" name="humedad" min="12" max="15" step="0.01" required><br>
 
-    <label>Cantidad:</label>
-    <input type="number" name="cantidad" step="0.01" required><br>
+        <label>Guía de ingreso:</label>
+        <input type="text" name="guia_ingreso"><br>
 
-    <label>Precio:</label>
-    <input type="number" name="precio" step="0.01" required><br>
+        <label>Cantidad:</label>
+        <input type="number" name="cantidad" step="0.01" required><br>
 
-    <button type="submit">Registrar</button>
-</form>
+        <label>Precio:</label>
+        <input type="number" name="precio" step="0.01" required><br>
+
+        <button type="submit">Registrar</button>
+    </form>
+    <script src="../../Helpers/registrar_Compras.js"></script>
+
+ </body>
+ </html>

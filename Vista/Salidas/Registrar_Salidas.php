@@ -1,4 +1,33 @@
-<!-- registrar_salida.php -->
+<?php
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    header("Location: ../../index.php");
+    exit();
+}
+
+require_once '../../Controlador/SalidaContolador.php';
+require_once '../../Modelo/Producto.php';
+
+$mensaje = $error = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $datos = [
+        'id_usuario'      => $_SESSION['id'],
+        'id_producto'     => $_POST['id_producto'],
+        'cantidad_salida' => $_POST['cantidad_salida'],
+        'destino'         => $_POST['destino'],
+        'observaciones'   => $_POST['observaciones']
+    ];
+
+    if (SalidaControlador::registrar($datos)) {
+        $mensaje = "Salida registrada correctamente.";
+    } else {
+        $error = "Error al registrar la salida.";
+    }
+}
+
+$productos = Producto::listarActivos(); // Asegúrate de tener este método
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,12 +36,20 @@
 </head>
 <body>
     <h2>Registrar Salida</h2>
-    <form action="registrar_salida.php" method="post">
+
+    <?php if ($mensaje): ?>
+        <p style="color:green"><?= $mensaje ?></p>
+    <?php elseif ($error): ?>
+        <p style="color:red"><?= $error ?></p>
+    <?php endif; ?>
+
+    <form method="POST">
         <label>Producto:</label>
-        <select name="producto">
-            <option value="FTO">FTO</option>
-            <option value="FT">FT</option>
-            <option value="C">C</option>
+        <select name="id_producto" required>
+            <option value="">Seleccione</option>
+            <?php foreach ($productos as $producto): ?>
+                <option value="<?= $producto['id'] ?>"><?= $producto['nombre'] ?></option>
+            <?php endforeach; ?>
         </select><br>
 
         <label>Cantidad de salida:</label>
@@ -26,14 +63,5 @@
 
         <input type="submit" value="Registrar Salida">
     </form>
-
-<?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    echo "<h3>Salida registrada correctamente (simulado)</h3>";
-    echo "<pre>";
-    print_r($_POST);
-    echo "</pre>";
-}
-?>
 </body>
 </html>

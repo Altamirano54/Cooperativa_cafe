@@ -31,13 +31,17 @@ class Socio {
         return $socios;
     }
 
-    public static function buscarPorId($id) {
+    public static function obtenerPorId($id) {
         $conexion = Conexion::getConexion();
-        $stmt = $conexion->prepare("SELECT * FROM socio WHERE id = ?");
-        $stmt->bind_param("i", $id);
+        $sql = "SELECT * FROM socio WHERE id = ?";
+        $stmt = $conexion->prepare($sql);
+        $stmt->bind_param('i', $id);
         $stmt->execute();
-        return $stmt->get_result()->fetch_assoc();
-    }
+        $res = $stmt->get_result();
+
+        return ($res->num_rows > 0) ? $res->fetch_assoc() : null;
+}
+
 
     // Getters y setters si los necesitas después
 }

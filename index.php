@@ -2,6 +2,7 @@
 session_start();
 require_once __DIR__ . '/Controlador/UsuarioControlador.php';
 
+
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -13,6 +14,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($usuarioEncontrado) {
         $_SESSION['usuario'] = $usuarioEncontrado['Usuario'];
         $_SESSION['rol'] = $usuarioEncontrado['rol'];
+        $_SESSION['id'] = $usuarioEncontrado['id'];
+
+
         header("Location: Vista/dashboard.php");
         exit();
     } else {

@@ -38,26 +38,22 @@ class Compra {
         }
         return $totales;
     }
-
-    public static function listar() {
+    public static function obtenerTodas() {
         $conexion = Conexion::getConexion();
-
         $sql = "SELECT 
-                    c.id,
-                    c.fecha_registro,
+                    c.id, 
                     p.nombre AS producto,
-                    s.nombre AS socio,
-                    u.Usuario AS usuario,
-                    c.cantidad,
-                    c.precio,
-                    c.rendimiento,
-                    c.humedad,
-                    c.guia_ingreso,
-                    c.unidad
+                    YEAR(c.fecha_registro) AS año,
+                    s.nombre AS nombre_socio,
+                    s.estado AS estado_socio,
+                    c.rendimiento, 
+                    c.humedad, 
+                    c.precio, 
+                    c.cantidad, 
+                    c.fecha_registro
                 FROM compra c
                 INNER JOIN producto p ON c.id_producto = p.id
                 INNER JOIN socio s ON c.id_socio = s.id
-                INNER JOIN usuarios u ON c.id_usuario = u.id
                 ORDER BY c.fecha_registro DESC";
 
         $result = $conexion->query($sql);
@@ -69,4 +65,5 @@ class Compra {
 
         return $compras;
     }
+
 }
