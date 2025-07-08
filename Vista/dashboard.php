@@ -31,16 +31,17 @@ if (!isset($_SESSION['usuario'])) {
     <div class="menu">
         <h2>Menú Principal</h2>
         <div class="menu-item">
-            <a href="compras/registro_compras.php" class="btn">Registro de Compras</a>
+            <a href="Compras/Registrar_Compras.php" class="btn">Registro de Compras</a>
+
         </div>
         <div class="menu-item">
-            <a href="salida/registro_salida.php" class="btn">Registro de Salidas</a>
+            <a href="Salidas/Registrar_Salidas.php" class="btn">Registrar salida </a>
         </div>
         <div class="menu-item">
-            <a href="compras/listar_compras.php" class="btn">Lista de Compras</a>
+            <a href="Compras/Listar_Compras.php" class="btn">Lista de Compras</a>
         </div>
         <div class="menu-item">
-            <a href="salida/listar_salidas.php" class="btn">Lista de Salidas</a>
+            <a href="Salidas/Listar_Salidas.php" class="btn">Lista de Salidas</a>
         </div>
         <div class="menu-item">
             <a href="../logout.php" class="btn btn-danger">Cerrar Sesión</a>

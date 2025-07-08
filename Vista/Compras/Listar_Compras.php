@@ -69,8 +69,8 @@ $compras = CompraControlador::obtenerCompras();
     </table>
 
     <div style="text-align: center;">
-        <a href="registrar_compra.php" class="btn">Nuevo Registro</a>
-        <a href="../../dashboard.php" class="btn btn-danger">Volver al Menú</a>
+        <a href="Registrar_Compras.php" class="btn">Nuevo Registro</a>
+        <a href="../dashboard.php" class="btn btn-danger">Volver al Menú</a>
     </div>
 </div>
 </body>

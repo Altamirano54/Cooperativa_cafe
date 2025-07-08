@@ -5,7 +5,7 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 
-require_once __DIR__ . '/../../Controlador/SalidaControlador.php';
+require_once __DIR__ . '/../../Controlador/SalidaContolador.php';
 $salidas = SalidaControlador::listar();
 ?>
 
@@ -41,21 +41,22 @@ $salidas = SalidaControlador::listar();
                 </tr>
             </thead>
             <tbody>
-                <?php while ($row = mysqli_fetch_assoc($salidas)): ?>
+                <?php foreach ($salidas as $row): ?>
                     <tr>
                         <td><?= $row['id'] ?></td>
                         <td><?= date('d/m/Y H:i', strtotime($row['fecha_salida'])) ?></td>
-                        <td><?= $row['producto'] ?></td>
-                        <td><?= $row['año'] ?></td>
-                        <td><?= $row['nombre_socio'] ?></td>
+                        <td><?= $row['producto'] ?? '' ?></td>
+                        <td><?= $row['año'] ?? '' ?></td>
+                        <td><?= $row['nombre_socio'] ?? '' ?></td>
                         <td><?= $row['cantidad_salida'] ?> qq</td>
                         <td><?= $row['destino'] ?></td>
                         <td><?= $row['observaciones'] ?></td>
                     </tr>
-                <?php endwhile; ?>
+                <?php endforeach; ?>
+
             </tbody>
         </table>
-        <a href="../../dashboard.php" class="btn">Volver al Menú</a>
+        <a href="../dashboard.php" class="btn btn-danger">Volver al Menú</a>
     </div>
 </body>
 </html>
