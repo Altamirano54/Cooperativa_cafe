@@ -1,77 +1,86 @@
 <?php
 session_start();
 if (!isset($_SESSION['usuario'])) {
-    header("Location: index.php");
+    header("Location: ../../index.php");
     exit();
 }
 
-require_once 'conexion.php';
+require_once '../../Controlador/CompraControlador.php';
 
-$query = "SELECT * FROM compras ORDER BY fecha_registro DESC";
-$result = mysqli_query($conexion, $query);
+$mensaje = $error = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (CompraControlador::registrarCompra($_POST)) {
+        $mensaje = "Registro guardado exitosamente.";
+    } else {
+        $error = "Error al registrar la compra.";
+    }
+}
+$totales = CompraControlador::obtenerTotales();
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Lista de Compras - Cooperativa de Café</title>
+    <title>Registro de Compras</title>
     <meta charset="UTF-8">
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f4f4f4; }
-        .container { max-width: 1200px; margin: 0 auto; background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        .header { text-align: center; margin-bottom: 30px; }
-        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
-        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #ddd; }
-        th { background-color: #f2f2f2; font-weight: bold; }
-        .btn { background-color: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; text-decoration: none; display: inline-block; margin: 5px; }
-        .btn:hover { background-color: #0056b3; }
-        .btn-danger { background-color: #dc3545; }
-        .btn-danger:hover { background-color: #c82333; }
-    </style>
+    <link rel="stylesheet" href="../../assets/css/estilos.css">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h2>LISTA DE COMPRAS REGISTRADAS</h2>
-        </div>
-        
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Producto</th>
-                    <th>Año</th>
-                    <th>Socio</th>
-                    <th>Rendimiento</th>
-                    <th>Humedad</th>
-                    <th>Estado</th>
-                    <th>Precio (S/)</th>
-                    <th>Cantidad (qq)</th>
-                    <th>Fecha</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while ($row = mysqli_fetch_assoc($result)): ?>
-                <tr>
-                    <td><?php echo $row['id']; ?></td>
-                    <td><?php echo $row['producto']; ?></td>
-                    <td><?php echo $row['año']; ?></td>
-                    <td><?php echo $row['nombre_socio']; ?></td>
-                    <td><?php echo $row['rendimiento']; ?>%</td>
-                    <td><?php echo $row['humedad']; ?>%</td>
-                    <td><?php echo $row['estado_socio']; ?></td>
-                    <td><?php echo number_format($row['precio'], 2); ?></td>
-                    <td><?php echo $row['cantidad']; ?></td>
-                    <td><?php echo date('d/m/Y H:i', strtotime($row['fecha_registro'])); ?></td>
-                </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
-        
-        <div style="text-align: center;">
-            <a href="registro_compras.php" class="btn">Nuevo Registro</a>
-            <a href="dashboard.php" class="btn btn-danger">Volver al Menú</a>
-        </div>
+<div class="container">
+    <h2>Registro de Compra de Café</h2>
+
+    <?php if ($mensaje): ?><div class="success"><?= $mensaje ?></div><?php endif; ?>
+    <?php if ($error): ?><div class="error"><?= $error ?></div><?php endif; ?>
+
+    <div class="totales">
+        <p><strong>FTO:</strong> <?= $totales['FTO'] ?? 0 ?> qq</p>
+        <p><strong>FT:</strong> <?= $totales['FT'] ?? 0 ?> qq</p>
+        <p><strong>C:</strong> <?= $totales['C'] ?? 0 ?> qq</p>
     </div>
+
+    <form method="POST">
+        <label>Producto:</label>
+        <select name="producto" required>
+            <option value="">Seleccione</option>
+            <option value="FTO">FTO</option>
+            <option value="FT">FT</option>
+            <option value="C">C</option>
+        </select><br>
+
+        <label>Stock:</label>
+        <input type="number" name="stock" step="0.01" required><br>
+
+        <label>Nombre de Socio:</label>
+        <input type="text" name="nombre_socio" required><br>
+
+        <label>COBASE:</label>
+        <input type="text" name="cobase"><br>
+
+        <label>Rendimiento (80-95):</label>
+        <input type="number" name="rendimiento" min="80" max="95" step="0.01" required><br>
+
+        <label>Humedad (12-15):</label>
+        <input type="number" name="humedad" min="12" max="15" step="0.01" required><br>
+
+        <label>Guía de Ingreso:</label>
+        <input type="text" name="guia_ingreso"><br>
+
+        <label>Estado de Socio:</label>
+        <select name="estado_socio" required>
+            <option value="activo">Activo</option>
+            <option value="inactivo">Inactivo</option>
+        </select><br>
+
+        <label>Precio:</label>
+        <input type="number" name="precio" step="0.01" required><br>
+
+        <label>Cantidad:</label>
+        <input type="number" name="cantidad" step="0.01" required><br>
+
+        <button type="submit">Registrar</button>
+        <a href="listar_compras.php">Lista de Compras</a>
+        <a href="../../dashboard.php">Dashboard</a>
+    </form>
+</div>
 </body>
 </html>
