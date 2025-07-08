@@ -1,42 +1,61 @@
+<?php
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    header("Location: ../../index.php");
+    exit();
+}
 
-<!-- ver_salidas.php -->
+require_once __DIR__ . '/../../Controlador/SalidaControlador.php';
+$salidas = SalidaControlador::listar();
+?>
+
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Listado de Salidas</title>
+    <title>Listado de Salidas - Cooperativa de Café</title>
+    <style>
+        body { font-family: Arial; padding: 20px; background: #f4f4f4; }
+        .container { background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px #ccc; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border-bottom: 1px solid #ccc; padding: 10px; text-align: left; }
+        th { background: #eee; }
+        .btn { margin-top: 20px; display: inline-block; padding: 10px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 5px; }
+        .btn:hover { background: #0056b3; }
+    </style>
 </head>
 <body>
-    <h2>Historial de Salidas (Simulado)</h2>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Producto</th>
-                <th>Cantidad</th>
-                <th>Destino</th>
-                <th>Fecha</th>
-                <th>Observaciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>FTO</td>
-                <td>50.00</td>
-                <td>Planta</td>
-                <td>2025-07-08</td>
-                <td>Lote de prueba</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>FT</td>
-                <td>30.00</td>
-                <td>Venta</td>
-                <td>2025-07-08</td>
-                <td>Pedido urgente</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="container">
+        <h2>Listado de Salidas Registradas</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Fecha</th>
+                    <th>Producto</th>
+                    <th>Año</th>
+                    <th>Socio</th>
+                    <th>Cantidad</th>
+                    <th>Destino</th>
+                    <th>Observaciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($row = mysqli_fetch_assoc($salidas)): ?>
+                    <tr>
+                        <td><?= $row['id'] ?></td>
+                        <td><?= date('d/m/Y H:i', strtotime($row['fecha_salida'])) ?></td>
+                        <td><?= $row['producto'] ?></td>
+                        <td><?= $row['año'] ?></td>
+                        <td><?= $row['nombre_socio'] ?></td>
+                        <td><?= $row['cantidad_salida'] ?> qq</td>
+                        <td><?= $row['destino'] ?></td>
+                        <td><?= $row['observaciones'] ?></td>
+                    </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+        <a href="../../dashboard.php" class="btn">Volver al Menú</a>
+    </div>
 </body>
 </html>

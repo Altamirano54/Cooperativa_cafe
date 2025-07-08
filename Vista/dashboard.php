@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['usuario'])) {
-    header("Location: index.php");
+    header("Location: ../index.php");
     exit();
 }
 ?>
@@ -9,8 +9,8 @@ if (!isset($_SESSION['usuario'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dashboard - Cooperativa de Café</title>
     <meta charset="UTF-8">
+    <title>Dashboard - Cooperativa de Café</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f4f4f4; }
         .header { background-color: #28a745; color: white; padding: 15px; text-align: center; margin-bottom: 20px; }
@@ -31,16 +31,19 @@ if (!isset($_SESSION['usuario'])) {
     <div class="menu">
         <h2>Menú Principal</h2>
         <div class="menu-item">
-            <a href="registro_compras.php" class="btn">Registro de Compras</a>
+            <a href="compras/registro_compras.php" class="btn">Registro de Compras</a>
         </div>
         <div class="menu-item">
-            <a href="salidas.php" class="btn">Registro de Salidas</a>
+            <a href="salida/registro_salida.php" class="btn">Registro de Salidas</a>
         </div>
         <div class="menu-item">
-            <a href="lista_compras.php" class="btn">Lista de Compras</a>
+            <a href="compras/listar_compras.php" class="btn">Lista de Compras</a>
         </div>
         <div class="menu-item">
-            <a href="logout.php" class="btn btn-danger">Salir</a>
+            <a href="salida/listar_salidas.php" class="btn">Lista de Salidas</a>
+        </div>
+        <div class="menu-item">
+            <a href="../logout.php" class="btn btn-danger">Cerrar Sesión</a>
         </div>
     </div>
 </body>
