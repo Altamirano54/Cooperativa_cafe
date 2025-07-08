@@ -2,7 +2,6 @@
 session_start();
 require_once __DIR__ . '/Controlador/UsuarioControlador.php';
 
-
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -14,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($usuarioEncontrado) {
         $_SESSION['usuario'] = $usuarioEncontrado['Usuario'];
         $_SESSION['rol'] = $usuarioEncontrado['rol'];
-        header("Location: dashboard.php");
+        header("Location: Vista/dashboard.php");
         exit();
     } else {
         $error = "Usuario o contraseña incorrectos";
