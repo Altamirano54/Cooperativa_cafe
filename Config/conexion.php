@@ -1,14 +1,28 @@
 <?php
-$servidor = "localhost";
-$usuario = "root";
-$password = "";
-$base_datos = "cooperativa_cafe";
+class Conexion {
+    private static $servidor = "localhost";
+    private static $usuario = "root";
+    private static $password = "";
+    private static $base_datos = "cooperativa_cafe";
+    private static $conexion = null;
 
-$conexion = mysqli_connect($servidor, $usuario, $password, $base_datos);
+    public static function getConexion() {
+        if (self::$conexion === null) {
+            self::$conexion = new mysqli(
+                self::$servidor,
+                self::$usuario,
+                self::$password,
+                self::$base_datos
+            );
 
-if (!$conexion) {
-    die("Error de conexión: " . mysqli_connect_error());
+            if (self::$conexion->connect_error) {
+                die("Error de conexión: " . self::$conexion->connect_error);
+            }
+
+            self::$conexion->set_charset("utf8");
+        }
+
+        return self::$conexion;
+    }
 }
-
-mysqli_set_charset($conexion, "utf8");
 ?>
