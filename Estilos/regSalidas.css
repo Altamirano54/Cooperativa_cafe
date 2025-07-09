@@ -1,0 +1,127 @@
+/* Estilos generales */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #121821; /* Fondo muy oscuro */
+    color: #e1e6f0; /* Texto claro */
+    margin: 0;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+/* Contenedor del formulario */
+form {
+    background-color: #1f2937; /* Azul oscuro grisáceo */
+    padding: 40px 50px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    max-width: 480px;
+    width: 100%;
+    border: 1px solid #334155;
+}
+
+/* Título */
+h2 {
+    text-align: center;
+    color: #f3f4f6;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    letter-spacing: 1.3px;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* Mensajes */
+p {
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding: 12px;
+    border-radius: 6px;
+    max-width: 480px;
+}
+
+p[style*="color:green"] {
+    background-color: #2e7d32; /* Verde oscuro */
+    color: #d0f0c0;
+    box-shadow: 0 0 10px #2e7d32;
+}
+
+p[style*="color:red"] {
+    background-color: #b71c1c; /* Rojo oscuro */
+    color: #f8d7da;
+    box-shadow: 0 0 10px #b71c1c;
+}
+
+/* Etiquetas */
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #cbd5e1; /* Gris claro */
+}
+
+/* Inputs, selects y textarea */
+input[type="number"],
+input[type="text"],
+select,
+textarea {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 25px;
+    border: 1.8px solid #475569;
+    border-radius: 8px;
+    background-color: #334155; /* Fondo oscuro para inputs */
+    color: #e1e6f0;
+    font-size: 15px;
+    font-weight: 500;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    resize: vertical;
+}
+
+input[type="number"]:focus,
+input[type="text"]:focus,
+select:focus,
+textarea:focus {
+    border-color: #3b82f6; /* Azul brillante */
+    outline: none;
+    box-shadow: 0 0 10px #3b82f6;
+}
+
+/* Placeholder */
+input::placeholder,
+textarea::placeholder {
+    color: #94a3b8;
+}
+
+/* Botón de envío */
+input[type="submit"] {
+    width: 100%;
+    background-color: #3b82f6; /* Azul brillante */
+    color: #f1f5f9;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 14px 0;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(59, 130, 246, 0.6);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #2563eb;
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.8);
+}
+
+/* Responsive */
+@media (max-width: 520px) {
+    body {
+        padding: 20px 10px;
+    }
+    form {
+        padding: 30px 25px;
+    }
+}
