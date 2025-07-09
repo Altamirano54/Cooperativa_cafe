@@ -9,7 +9,7 @@ $usuarios = UsuarioControlador::obtenerUsuarios();
     <?php foreach ($usuarios as $u): ?>
         <tr>
             <td><?= $u['id'] ?></td>
-            <td><?= $u['usuario'] ?></td>
+            <td><?= $u['Usuario'] ?></td>
             <td><?= $u['rol'] ?></td>
         </tr>
     <?php endforeach; ?>
