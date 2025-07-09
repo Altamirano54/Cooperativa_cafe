@@ -49,6 +49,30 @@ button{
     cursor:pointer;
     transition:background .2s;
 }
+.btn {
+    background-color: #28a745;
+    color: #fff;
+    padding: 12px 0;
+    border: none;
+    border-radius:6px;
+    font-size:14px;
+    font-weight: 600;
+    width: 100%;
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.2);
+    transition:background .2s;
+}
+.btn-danger {
+    background-color: #e25f5d;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(155, 49, 49, 0.5);
+}
+.btn-danger:hover {
+    background-color: #d53a3a;
+}
 button:hover{ background:#065bb8; }
 p{ margin-top:16px; text-align:center; font-weight:600; }
 </style>
@@ -63,6 +87,7 @@ p{ margin-top:16px; text-align:center; font-weight:600; }
         <option value="inactivo">Inactivo</option>
     </select>
     <button type="submit">Registrar Socio</button>
+    <a href="../dashboard.php" class="btn btn-danger">Volver al Menú</a>
 </form>
 
 <?php if (isset($mensaje)) echo "<p>$mensaje</p>"; ?>

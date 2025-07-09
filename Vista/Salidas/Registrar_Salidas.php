@@ -63,6 +63,7 @@ $productos = Producto::listarActivos(); // Asegúrate de tener este método
         <textarea name="observaciones" rows="3"></textarea><br>
 
         <input type="submit" value="Registrar Salida">
+        <a href="../dashboard.php" class="btn btn-danger">Volver al Menú</a>
     </form>
 </body>
 </html>

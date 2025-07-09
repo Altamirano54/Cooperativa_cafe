@@ -86,6 +86,8 @@ $totales = CompraControlador::obtenerTotales();
         <input type="number" name="precio" step="0.01" required><br>
 
         <button type="submit">Registrar</button>
+        <a href="../dashboard.php" class="btn btn-danger">Volver al Menú</a>
+        
     </form>
     <script src="../../Helpers/registrar_Compras.js"></script>
 

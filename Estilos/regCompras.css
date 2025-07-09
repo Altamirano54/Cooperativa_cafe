@@ -102,7 +102,30 @@ form button:hover {
     background-color: #3a7bd5;
     box-shadow: 0 6px 18px rgba(58, 123, 213, 0.7);
 }
-
+.btn {
+    background-color: #28a745;
+    color: #000000;
+    padding: 14px 0;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 700;
+    width: 100%;
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.2);
+    transition: background-color 0.3s ease;
+}
+.btn-danger {
+    background-color: #e25f5d;
+    color: #000000;
+    box-shadow: 0 4px 12px rgb(82, 25, 25);
+}
+.btn-danger:hover {
+    background-color: #d53a3a;
+}
 /* Mensajes */
 .mensaje {
     text-align: center;

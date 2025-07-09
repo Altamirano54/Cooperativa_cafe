@@ -26,6 +26,32 @@ $productos = ProductoControlador::listar();
         .card h3 { margin: 10px 0 5px; color: #333; }
         .card p { margin: 5px 0; color: #555; }
         .price { font-size: 1.2em; font-weight: bold; color: #28a745; margin-top: 10px; }
+        
+        .btn {
+            background-color: #28a745;
+            color: #fff;
+            padding: 12px 0;
+            border: none;
+            border-radius:6px;
+            font-size:14px;
+            font-weight: 600;
+            max-width: 150px;
+            width: 100%;
+            display: block;
+            margin-top: 15px;
+            text-align: center;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.2);
+            transition:background .2s;
+        }
+        .btn-danger {
+            background-color: #e25f5d;
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(155, 49, 49, 0.5);
+        }
+        .btn-danger:hover {
+            background-color: #d53a3a;
+        }
     </style>
 </head>
 <body>
@@ -39,5 +65,6 @@ $productos = ProductoControlador::listar();
         </div>
         <?php endforeach; ?>
     </div>
+    <div><a href="../dashboard.php" class="btn btn-danger">Volver al Menú</a></div>
 </body>
 </html>
