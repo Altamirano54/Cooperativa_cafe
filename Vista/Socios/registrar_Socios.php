@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../../Controlador/SocioControlador.php';
-
+$tiposDocumento = SocioControlador::obtenerTiposDocumento();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombre = $_POST['nombre'];
     $tipoDoc = $_POST['tipo_documento'];
@@ -49,6 +49,8 @@ button{
     cursor:pointer;
     transition:background .2s;
 }
+button:hover{ background:#065bb8; }
+p{ margin-top:16px; text-align:center; font-weight:600; }
 .btn {
     background-color: #28a745;
     color: #fff;
@@ -73,13 +75,18 @@ button{
 .btn-danger:hover {
     background-color: #d53a3a;
 }
-button:hover{ background:#065bb8; }
-p{ margin-top:16px; text-align:center; font-weight:600; }
 </style>
 
 <form method="POST">
     <input type="text" name="nombre" placeholder="Nombre" required>
-    <input type="number" name="tipo_documento" placeholder="ID Tipo Documento" required>
+<select name="tipo_documento" required>
+    <option value="">Seleccione Tipo de Documento</option>
+    <?php foreach ($tiposDocumento as $tipo): ?>
+        <option value="<?= htmlspecialchars($tipo['id']) ?>">
+            <?= htmlspecialchars($tipo['nombre']) ?>
+        </option>
+    <?php endforeach; ?>
+</select>
     <input type="text" name="nro_documento" placeholder="N° Documento" required>
     <input type="text" name="cobase" placeholder="COBASE">
     <select name="estado">
@@ -87,7 +94,7 @@ p{ margin-top:16px; text-align:center; font-weight:600; }
         <option value="inactivo">Inactivo</option>
     </select>
     <button type="submit">Registrar Socio</button>
-    <a href="../dashboard.php" class="btn btn-danger">Volver al Menú</a>
+        <a href="../dashboard.php" class="btn btn-danger">Volver al Menú</a>
 </form>
 
 <?php if (isset($mensaje)) echo "<p>$mensaje</p>"; ?>

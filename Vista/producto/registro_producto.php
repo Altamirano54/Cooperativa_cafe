@@ -66,11 +66,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <div class="form-group">
                 <label>Stock:</label>
-                <input type="number" name="stock" step="0.01" required>
+                <input type="number" min="0" name="stock" step="0.01" required>
             </div>
             <div class="form-group">
                 <label>Precio (S/):</label>
-                <input type="number" name="precio" step="0.01" required>
+                <input type="number" name="precio" min="0" step="0.01" required>
             </div>
             <button type="submit" class="btn">Registrar</button>
             <a href="../dashboard.php" class="btn btn-danger">Volver al Menú</a>

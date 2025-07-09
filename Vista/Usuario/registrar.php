@@ -1,23 +1,31 @@
 <?php
 require_once '../../Controlador/UsuarioControlador.php';
+$tiposDocumento = UsuarioControlador::obtenerTiposDocumento();
 
 $mensaje = '';
-
+$error= '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Validamos campos con operador de fusión nula (??)
-    $usuario = $_POST['usuario'] ?? '';
-    $password = $_POST['password'] ?? '';
-    $rol = $_POST['rol'] ?? '';
-    $id_tipoDocumento = $_POST['id_tipoDocumento'] ?? '';
-    $nro_documento = $_POST['nro_documento'] ?? '';
+   $usuario = trim($_POST['usuario'] ?? '');
+$password = $_POST['password'] ?? '';
+$rol = $_POST['rol'] ?? '';
+$id_tipoDocumento = $_POST['id_tipoDocumento'] ?? '';
+$nro_documento = trim($_POST['nro_documento'] ?? '');
 
-    // Validación básica
-    if ($usuario && $password && $rol && $id_tipoDocumento && $nro_documento) {
-        $ok = UsuarioControlador::registrar($usuario, $password, $rol, $id_tipoDocumento, $nro_documento);
-        $mensaje = $ok ? "Usuario registrado exitosamente" : "Error al registrar";
-    } else {
-        $mensaje = "Todos los campos son obligatorios.";
-    }
+// Validación de espacios
+if (preg_match('/\s/', $usuario)) {
+    $error= "El nombre de usuario no debe contener espacios.";
+} elseif (UsuarioControlador::existeUsuario($usuario)) {
+    $error = "El nombre de usuario ya está en uso.";
+} elseif (UsuarioControlador::documentoExiste($nro_documento)) {
+    $error = "El número de documento ya está registrado.";
+} elseif ($usuario && $password && $rol && $id_tipoDocumento && $nro_documento) {
+    $hash = password_hash($password, PASSWORD_DEFAULT);
+    $ok = UsuarioControlador::registrar($usuario, $hash, $rol, $id_tipoDocumento, $nro_documento);
+    $mensaje = $ok ? "Usuario registrado exitosamente" : "Error al registrar.";
+} else {
+    $error= "Todos los campos son obligatorios.";
+}
+
 }
 ?>
 
@@ -49,8 +57,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               border: none;
                cursor: pointer; }
         button:hover { background-color: #218838; }
+
+        .error{text-align: center;
+            color:rgb(255, 0, 0);
+             margin-bottom: 15px; }
+
         .mensaje { text-align: center;
-             margin-bottom: 15px; color: #333; }
+            color:rgb(47, 161, 49);
+             margin-bottom: 15px; }
          .btn {
     background-color: #28a745;
     color: #fff;
@@ -82,12 +96,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <form method="POST">
         <h2 style="text-align:center;">Registrar Usuario</h2>
 
-        <?php if (!empty($mensaje)): ?>
-            <div class="mensaje"><?= htmlspecialchars($mensaje) ?></div>
-        <?php endif; ?>
+       <?php if (!empty($mensaje)): ?>
+    <div class="mensaje"><?= htmlspecialchars($mensaje) ?></div>
+<?php endif; ?>
 
-        <input type="text" name="usuario" placeholder="Usuario" required>
-        <input type="password" name="password" placeholder="Contraseña" required>
+<?php if (!empty($error)): ?>
+    <div class="error"><?= htmlspecialchars($error) ?></div>
+<?php endif; ?>
+
+
+        <input type="text" name="usuario" value="<?= htmlspecialchars($usuario ?? '') ?>" pattern="^\S+$" placeholder="Usuario" required>
+
+
+        <input type="password" name="password" placeholder="Contraseña" pattern="^\S+$" required>
 
         <select name="rol" required>
             <option value="">Seleccione Rol</option>
@@ -96,11 +117,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </select>
 
         <select name="id_tipoDocumento" required>
-            <option value="">Tipo de Documento</option>
-            <option value="1">DNI</option>
-            <option value="2">Carnet de Extranjería</option>
-            <!-- Puedes cargar dinámicamente desde base de datos si ya tienes esa tabla -->
+            <option value="">Seleccione Tipo de Documento</option>
+            <?php foreach ($tiposDocumento as $tipo): ?>
+                <option value="<?= htmlspecialchars($tipo['id']) ?>">
+                    <?= htmlspecialchars($tipo['nombre']) ?>
+                </option>
+            <?php endforeach; ?>
         </select>
+
 
         <input type="text" name="nro_documento" placeholder="N° Documento" required>
 

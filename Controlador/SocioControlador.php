@@ -2,7 +2,16 @@
 require_once __DIR__ . '/../Modelo/Socio.php';
 
 class SocioControlador {
-    
+
+    public static function listarDocumentos() {
+        $conexion = Conexion::getConexion();
+        $sql = "SELECT nombre FROM tipodocumento WHERE id = '?'";
+        $stmt = $conexion->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+   
+
     // Devuelve todos los socios activos
     public static function listarActivos() {
         return Socio::listarActivos();
@@ -19,6 +28,14 @@ class SocioControlador {
         $stmt->bind_param("sisss", $nombre, $tipoDoc, $nroDoc, $cobase, $estado);
         return $stmt->execute();
     }
+
+public static function obtenerTiposDocumento() {
+    $conn = Conexion::getConexion(); // tu conexión mysqli
+    $stmt = $conn->prepare("SELECT id, nombre FROM tipodocumento");
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+    return $resultado->fetch_all(MYSQLI_ASSOC);
+}
 
 
    

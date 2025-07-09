@@ -80,10 +80,10 @@ $totales = CompraControlador::obtenerTotales();
         <input type="text" name="guia_ingreso"><br>
 
         <label>Cantidad:</label>
-        <input type="number" name="cantidad" step="0.01" required><br>
+        <input type="number" name="cantidad" min="0" step="0.01" required><br>
 
         <label>Precio:</label>
-        <input type="number" name="precio" step="0.01" required><br>
+        <input type="number" name="precio" min="0" step="0.01" required><br>
 
         <button type="submit">Registrar</button>
         <a href="../dashboard.php" class="btn btn-danger">Volver al Menú</a>

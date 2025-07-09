@@ -54,7 +54,7 @@ $productos = Producto::listarActivos(); // Asegúrate de tener este método
         </select><br>
 
         <label>Cantidad de salida:</label>
-        <input type="number" name="cantidad_salida" step="0.01" required><br>
+        <input type="number" name="cantidad_salida" min="0" step="0.01" required><br>
 
         <label>Destino:</label>
         <input type="text" name="destino" value="Planta de Procesamiento"><br>
