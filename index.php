@@ -23,6 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = "Usuario o contraseña incorrectos";
     }
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Cooperativa de Café - Login</title>
-    <link rel="stylesheet" href="assets/css/login.css">
+    <link rel="stylesheet" href="Estilos/index.css">
 </head>
 <body>
     <div class="login-container">

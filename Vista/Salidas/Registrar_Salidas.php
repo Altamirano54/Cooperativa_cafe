@@ -33,9 +33,10 @@ $productos = Producto::listarActivos(); // Asegúrate de tener este método
 <head>
     <meta charset="UTF-8">
     <title>Registrar Salida de Café</title>
+    <link rel="stylesheet" href="../../Estilos/regSalidas.css">
 </head>
 <body>
-    <h2>Registrar Salida</h2>
+    
 
     <?php if ($mensaje): ?>
         <p style="color:green"><?= $mensaje ?></p>
@@ -44,6 +45,8 @@ $productos = Producto::listarActivos(); // Asegúrate de tener este método
     <?php endif; ?>
 
     <form method="POST">
+        <h2>Registrar Salidas</h2>
+
         <label>Producto:</label>
         <select name="id_producto" required>
             <option value="">Seleccione</option>
