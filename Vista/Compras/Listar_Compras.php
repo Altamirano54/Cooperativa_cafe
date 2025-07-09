@@ -9,7 +9,6 @@ require_once '../../Controlador/CompraControlador.php';
 
 $compras = CompraControlador::obtenerCompras();
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>

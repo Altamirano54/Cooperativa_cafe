@@ -4,11 +4,9 @@ if (!isset($_SESSION['usuario'])) {
     header("Location: ../../index.php");
     exit();
 }
-
 require_once __DIR__ . '/../../Controlador/SalidaContolador.php';
 $salidas = SalidaControlador::listar();
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,7 +51,6 @@ $salidas = SalidaControlador::listar();
                         <td><?= $row['observaciones'] ?></td>
                     </tr>
                 <?php endforeach; ?>
-
             </tbody>
         </table>
         <a href="../dashboard.php" class="btn btn-danger">Volver al Menú</a>

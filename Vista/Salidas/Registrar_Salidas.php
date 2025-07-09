@@ -52,7 +52,6 @@ $productos = Producto::listarActivos(); // Asegúrate de tener este método
                 <option value="<?= $producto['id'] ?>"><?= $producto['nombre'] ?></option>
             <?php endforeach; ?>
         </select><br>
-
         <label>Cantidad de salida:</label>
         <input type="number" name="cantidad_salida" min="0" step="0.01" required><br>
 
