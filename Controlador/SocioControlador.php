@@ -13,6 +13,14 @@ class SocioControlador {
         return Socio::obtenerPorId($id);
     }
 
+    public static function registrar($nombre, $tipoDoc, $nroDoc, $cobase, $estado) {
+        $conexion = Conexion::getConexion();
+        $stmt = $conexion->prepare("INSERT INTO socio (nombre, id_tipoDocumento, nro_documento, cobase, estado) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("sisss", $nombre, $tipoDoc, $nroDoc, $cobase, $estado);
+        return $stmt->execute();
+    }
+
+
    
     
 }

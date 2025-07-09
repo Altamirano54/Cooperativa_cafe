@@ -18,7 +18,7 @@ class Producto {
 
     public static function listarActivos() {
         $conexion = Conexion::getConexion();
-        $sql = "SELECT * FROM producto WHERE estado = 'activo'";
+        $sql = "SELECT * FROM producto WHERE estado = 'activo' ORDER BY nombre ASC";
         $result = $conexion->query($sql);
         $productos = [];
 
@@ -45,6 +45,17 @@ class Producto {
 
         return $stmt->execute();
     }
+
+    public static function insertar($nombre, $stock, $precio, $estado = 'activo') {
+        $conexion = Conexion::getConexion();
+        $sql = "INSERT INTO producto (nombre, stock, precio, estado) VALUES (?, ?, ?, ?)";
+        $stmt = $conexion->prepare($sql);
+        $stmt->bind_param("sdds", $nombre, $stock, $precio, $estado);
+        return $stmt->execute();
+    }
+
+
+
 
     // Getters y setters si los necesitas después
 }

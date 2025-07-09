@@ -1,37 +1,28 @@
-[⚠️ Suspicious Content] <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Registrar Socio</title>
-</head>
-<body>
-    <h2>Registrar Nuevo Socio</h2>
-    <form action="registrar_socio.php" method="post">
-        <label>Nombre:</label>
-        <input type="text" name="nombre" required><br>
-
-        <label>Tipo de Documento:</label>
-        <select name="tipo_documento">
-            <option value="1">DNI</option>
-            <option value="2">RUC</option>
-        </select><br>
-
-        <label>Nro Documento:</label>
-        <input type="text" name="nro_documento" required><br>
-
-        <label>Cobase:</label>
-        <input type="text" name="cobase"><br>
-
-        <input type="submit" value="Registrar Socio">
-    </form>
-
 <?php
+require_once __DIR__ . '/../../Controlador/SocioControlador.php';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    echo "<h3>Socio registrado correctamente (simulado)</h3>";
-    echo "<pre>";
-    print_r($_POST);
-    echo "</pre>";
+    $nombre = $_POST['nombre'];
+    $tipoDoc = $_POST['tipo_documento'];
+    $nroDoc = $_POST['nro_documento'];
+    $cobase = $_POST['cobase'];
+    $estado = $_POST['estado'];
+
+    $ok = SocioControlador::registrar($nombre, $tipoDoc, $nroDoc, $cobase, $estado);
+    $mensaje = $ok ? "Socio registrado correctamente" : "Error al registrar socio";
 }
 ?>
-</body>
-</html>
+
+<form method="POST">
+    <input type="text" name="nombre" placeholder="Nombre" required>
+    <input type="number" name="tipo_documento" placeholder="ID Tipo Documento" required>
+    <input type="text" name="nro_documento" placeholder="N° Documento" required>
+    <input type="text" name="cobase" placeholder="COBASE">
+    <select name="estado">
+        <option value="activo">Activo</option>
+        <option value="inactivo">Inactivo</option>
+    </select>
+    <button type="submit">Registrar Socio</button>
+</form>
+
+<?php if (isset($mensaje)) echo "<p>$mensaje</p>"; ?>

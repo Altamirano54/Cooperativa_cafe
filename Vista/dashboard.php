@@ -44,6 +44,24 @@ if (!isset($_SESSION['usuario'])) {
             <a href="Salidas/Listar_Salidas.php" class="btn">Lista de Salidas</a>
         </div>
         <div class="menu-item">
+            <a href="producto/registro_producto.php" class="btn btn-danger">Registrar Produtos</a>
+        </div>
+        <div class="menu-item">
+            <a href="producto/listar_productos.php" class="btn btn-danger">Listar Productos</a>
+        </div>
+        <div class="menu-item">
+            <a href="Socios/registrar_Socios.php" class="btn btn-danger">Registrar Socio</a>
+        </div>
+        <div class="menu-item">
+            <a href="Socios/Listar_Socios.php" class="btn btn-danger">Listar Socios</a>
+        </div>
+        <div class="menu-item">
+            <a href="Usuario/registrar.php" class="btn btn-danger">Registrar Usuario</a>
+        </div>
+        <div class="menu-item">
+            <a href="Usuario/listar.php" class="btn btn-danger">Listar Usarios</a>
+        </div>
+        <div class="menu-item">
             <a href="../logout.php" class="btn btn-danger">Cerrar Sesión</a>
         </div>
     </div>

@@ -30,5 +30,13 @@ class CompraControlador {
         return Compra::obtenerTodas();
     }
 
+        public static function registrar($nombre, $descripcion, $categoria, $precio) {
+        return Producto::insertar($nombre, $descripcion, $categoria, $precio);
+    }
+
+    public static function listar() {
+        return Producto::listarActivos();
+    }
+
 
 }
